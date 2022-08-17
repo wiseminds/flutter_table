@@ -15,7 +15,7 @@ class Preference {
   bool _initialized = false;
 
   Future initStore() async {
-    box = await Hive.openLazyBox('table-preference');
+    box = await Hive.openLazyBox('flutter-table-preference');
     _initialized = true;
   }
 
