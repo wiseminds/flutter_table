@@ -2,7 +2,7 @@ import 'dart:math';
  
 import 'package:data_repository/models/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_table/table/preference.dart'; 
+import 'package:flutter_table/src/preference.dart'; 
 
 import '../models/column_description.dart';
 import '../models/pager.dart';

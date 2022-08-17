@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_table/table/preference.dart';
+import 'package:flutter_table/src/preference.dart';
 
 import '../table_data_source.dart';
 

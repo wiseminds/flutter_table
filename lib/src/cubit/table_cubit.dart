@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_table/table/preference.dart'; 
+import 'package:flutter_table/src/preference.dart'; 
 import 'package:equatable/equatable.dart';
 
 import '../models/sort_query.dart';
