@@ -79,89 +79,92 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               checkColor: MaterialStateProperty.all(Colors.white),
             )),
         child: Padding(
-          padding: EdgeInsets.all(padding),
+          padding:
+              EdgeInsets.only(bottom: padding, left: padding, right: padding),
           child: Stack(
             // fit: StackFit.expand,
             children: [
-              NestedScrollView(
-                  headerSliverBuilder: (context, innerBoxIsScrolled) => [],
-                  body: ListView(
+              // NestedScrollView(
+              //     headerSliverBuilder: (context, innerBoxIsScrolled) => [],
+              //     body:
+              Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(title,
-                              style: TextStyle(
-                                  fontSize: mini ? 20 : 28,
-                                  color: Theme.of(context).iconTheme.color,
-                                  fontWeight: FontWeight.w500)),
-                          const Spacer(),
-                          // if (!mini)
-                        ],
-                      ),
-                      const SizedBox(height: 40.0),
-                      // 40.0.h,
-                      FilterView(
-                        mini: mini,
-                        source: source,
-                        // onChanged: (filter) {
-                        //   source.setFilter(filter);
-                        // },
-                      ),
-                      if (!mini) Row(children: [const Spacer(), ...actions]),
-                      if (!mini)
-                        Row(
+                      Text(title,
+                          style: TextStyle(
+                              fontSize: mini ? 20 : 28,
+                              color: Theme.of(context).iconTheme.color,
+                              fontWeight: FontWeight.w500)),
+                      const Spacer(),
+                      // if (!mini)
+                    ],
+                  ),
+                  const SizedBox(height: 80.0),
+                  // 40.0.h,
+                  FilterView(
+                    mini: mini,
+                    source: source,
+                    // onChanged: (filter) {
+                    //   source.setFilter(filter);
+                    // },
+                  ),
+                  // if (!mini) Row(children: [const Spacer(), ...actions]),
+                  if (!mini)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            width: 400,
+                            child: TextFormField(
+                                style: Theme.of(context).textTheme.caption,
+                                decoration: InputDecoration(
+                                    hintText: searchHintText,
+                                    prefixIcon: const Icon(Icons.search),
+                                    hintStyle:
+                                        Theme.of(context).textTheme.caption,
+                                    labelStyle:
+                                        Theme.of(context).textTheme.caption,
+                                    isDense: true,
+                                    fillColor: Colors.transparent,
+                                    filled: true,
+                                    contentPadding: const EdgeInsets.all(10)
+                                    // errorBorder: InputBorder.none,
+                                    // border: InputBorder.none,
+                                    ),
+                                onChanged: source.setQuery)),
+                        const Spacer(),
+                        Perpage(source: source),
+                        const SizedBox(width: 20.0),
+                        ...actions
+                      ],
+                    ),
+                  if (source.selected.isNotEmpty && !mini)
+                    Material(
+                      color: Theme.of(context).primaryColor.withOpacity(.2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
                           children: [
-                            SizedBox(
-                                width: 400,
-                                child: TextFormField(
-                                    style: Theme.of(context).textTheme.caption,
-                                    decoration: InputDecoration(
-                                        hintText: searchHintText,
-                                        prefixIcon: const Icon(Icons.search),
-                                        hintStyle:
-                                            Theme.of(context).textTheme.caption,
-                                        labelStyle:
-                                            Theme.of(context).textTheme.caption,
-                                        isDense: true,
-                                        fillColor: Colors.transparent,
-                                        filled: true,
-                                        contentPadding: const EdgeInsets.all(10)
-                                        // errorBorder: InputBorder.none,
-                                        // border: InputBorder.none,
-                                        ),
-                                    onChanged: source.setQuery)),
+                            Text('${source.selected.length} items Selected',
+                                style: const TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w500)),
                             const Spacer(),
-                            Perpage(source: source),
+                            for (var item in selectedActions)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: item,
+                              )
                           ],
                         ),
-                      if (source.selected.isNotEmpty && !mini)
-                        Material(
-                          color: Theme.of(context).primaryColor.withOpacity(.2),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              children: [
-                                Text('${source.selected.length} items Selected',
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500)),
-                                const Spacer(),
-                                for (var item in selectedActions)
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: item,
-                                  )
-                              ],
-                            ),
-                          ),
-                        ),
-                      // onChanged: (v) => cubit.load(sort: sort))),
-                      const SizedBox(height: 20.0),
-                      Material(
-                          color: Colors.white,
-                          elevation: 1,
-                          clipBehavior: Clip.antiAlias,
+                      ),
+                    ),
+                  // onChanged: (v) => cubit.load(sort: sort))),
+                  // const SizedBox(height: 20.0),
+                  Expanded(
+                      child: SingleChildScrollView(
                           child: SingleChildScrollView(
+                              physics: PageScrollPhysics(),
                               // dragStartBehavior: DragStartBehavior.down,
                               scrollDirection: Axis.horizontal,
                               child: ConstrainedBox(
@@ -182,18 +185,18 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                   columns: columns, rows: rows,
                                   // source: source
                                 ),
-                              ))),
-                      if (!mini) const SizedBox(height: 20.0),
-                      if (!mini)
-                        Row(
-                          children: [
-                            Perpage(source: source),
-                            const Spacer(),
-                            PaginationPages(source: source)
-                          ],
-                        )
-                    ],
-                  )),
+                              )))),
+                  if (!mini) const SizedBox(height: 20.0),
+                  if (!mini)
+                    Row(
+                      children: [
+                        Perpage(source: source),
+                        const Spacer(),
+                        PaginationPages(source: source)
+                      ],
+                    )
+                ],
+              ),
               Positioned(
                   top: 0,
                   left: 0,

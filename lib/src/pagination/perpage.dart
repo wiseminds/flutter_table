@@ -14,6 +14,11 @@ class Perpage extends StatelessWidget {
         valueListenable: source.perPage,
         builder: (context, s, w) {
           return Row(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('show',
+                  style: Theme.of(context).textTheme.caption?.copyWith()),
+            ),
             Material(
               color: Colors.white,
               shape: const RoundedRectangleBorder(side: BorderSide(width: .1)),
@@ -46,7 +51,7 @@ class Perpage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('entries per page',
+              child: Text('entities',
                   style: Theme.of(context).textTheme.caption?.copyWith()),
             ),
           ]);
