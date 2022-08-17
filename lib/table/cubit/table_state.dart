@@ -75,7 +75,7 @@ class TableState<T> extends Equatable {
 
   Future<Map<String, dynamic>> get buildQuery async => {
         'page': page,
-        'perPage': await GetIt.I<PreferenceStore>().getInt(PrefKeys.perPage),
+        'perPage': await Preference().getInt(Preference.perPage),
       };
 
   Map<String, dynamic> get buildPrevQuery => {

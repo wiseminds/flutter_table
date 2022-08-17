@@ -1,6 +1,6 @@
 part of 'table_cubit.dart';
 
-abstract class TableRepository<T> extends DataRepository with ValidatorMixin {
+abstract class TableRepository<T> extends DataRepository {
   TableRepository(super.localRepository, super.remoteRepository);
 
   Future<ApiResponse<List<T>, T>> load(Map<String, dynamic> query);

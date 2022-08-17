@@ -14,7 +14,8 @@ dependencies:
   data_repository: ^0.1.8  
   equatable: ^2.0.3  
   flutter_bloc: ^8.1.1
-  get_it: ^7.2.0
+  # get_it: ^7.2.0
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,10 @@
 import 'dart:math';
 
-import 'package:admin/constants/pref_keys.dart';
-import 'package:admin/core/utils/validator_mixin.dart';
-import 'package:admin/data/local/preference_store/preference_store.dart';
-import 'package:bloc/bloc.dart';
+ 
 import 'package:data_repository/data_repository.dart';
-import 'package:get_it/get_it.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_table/table/preference.dart'; 
 import 'package:equatable/equatable.dart';
 
 import '../models/sort_query.dart';
@@ -31,7 +29,7 @@ class TableCubit<T> extends Cubit<TableState<T>> {
 
   Future<void> load({bool loadCurrent = false, SortQuery? sort}) async {
     emit(state.loading());
-    var perPage = await GetIt.I<PreferenceStore>().getInt(PrefKeys.perPage);
+    var perPage = await Preference().getInt(Preference.perPage);
     var query = await state.buildQuery;
     if (!loadCurrent) query.addAll({'perPage': perPage, 'page': 1});
     if (sort != null) query.addAll(sort.toMap);

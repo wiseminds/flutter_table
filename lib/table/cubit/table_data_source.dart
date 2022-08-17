@@ -1,11 +1,8 @@
 import 'dart:math';
-
-import 'package:admin/constants/app_colors.dart';
-import 'package:admin/constants/pref_keys.dart';
-import 'package:admin/data/local/preference_store/preference_store.dart';
+ 
 import 'package:data_repository/models/index.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_table/table/preference.dart'; 
 
 import '../models/column_description.dart';
 import '../models/pager.dart';
@@ -39,8 +36,7 @@ abstract class TableDataSource<T> extends BaseTableDataSource<T>
   TableDataSource(super.repository, {int sortIndex = 0}) {
     print('TableDataSource created');
     this.sortIndex = sortIndex;
-    GetIt.I<PreferenceStore>()
-        .getInt(PrefKeys.perPage)
+     Preference().getInt(Preference.perPage)
         .then((value) => perPage.value = value ?? perPage.value);
   }
 
