@@ -175,19 +175,50 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       //         minWidth:
                       //             MediaQuery.of(context).size.width -
                       //                 300),
-                      child: DataTable2(
-                    minWidth: minWidth,
-                    // smRatio: 0.5,
-                    // lmRatio: 4.5,
-                    headingRowColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor.withOpacity(.2)),
-                    onSelectAll: source.toggleAllSelection,
-                    sortColumnIndex: source.sortIndex,
-                    sortAscending: source.sortAscending,
-                    showBottomBorder: false,
-                    showCheckboxColumn: !mini,
-                    columns: columns, rows: rows,
-                    // source: source
+                      child: Stack(
+                    children: [
+                      DataTable2(
+                        minWidth: minWidth,
+
+                        // smRatio: 0.5,
+                        // lmRatio: 4.5,
+                        headingRowColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor.withOpacity(.2)),
+                        onSelectAll: source.toggleAllSelection,
+                        sortColumnIndex: source.sortIndex,
+                        sortAscending: source.sortAscending,
+                        showBottomBorder: false,
+                        showCheckboxColumn: !mini,
+                        columns: columns, rows: rows,
+                        // source: source
+                      ),
+                      Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: ValueListenableBuilder<bool>(
+                              valueListenable: source.isLoading,
+                              builder: (c, s, w) => s || source.rowCount < 1
+                                  ? const SizedBox()
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                          const SizedBox(height: 20),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Icon(
+                                              Icons.search,
+                                              size: 90,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Text('No data here')
+                                        ]))),
+                    ],
                   )),
                   if (!mini) const SizedBox(height: 20.0),
                   if (!mini)
@@ -200,6 +231,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     )
                 ],
               ),
+
               Positioned(
                   top: 0,
                   left: 0,
