@@ -10,11 +10,13 @@ class PaginationPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+ 
     return ValueListenableBuilder<Pager?>(
         valueListenable: source.pager,
         builder: (context, s, w) {
+          // print('mmmmmmmmmm:  ${s?.total}, ${s?.pages} ${s?.page}');
           if (s == null || s.pages <= 1) {
-            return const SizedBox();
+            return  const SizedBox();
           }
           // var pages = List.generate(s.pages, (index) => index +1);
           //
@@ -52,7 +54,7 @@ class PaginationPages extends StatelessWidget {
             //     .toList();
           }
           return Row(
-            children: [
+            children: [ 
               if (s.page > 1)
                 PaginationButton(
                     display: const Icon(Icons.arrow_back_ios_new, size: 12),

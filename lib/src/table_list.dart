@@ -1,5 +1,6 @@
 // import 'package:flutter_table/core/extensions/index.dart';
 // import 'package:data_table_2/data_table_2.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,9 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   TableListState({this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
-  double? get height => MediaQuery.of(context).size.height - 100;
+  // double? get height => MediaQuery.of(context).size.height - 100;
   double get padding => 20.0;
+  double get minWidth => 1200;
   // late PaginatorController paginatorController;
 
   bool sortAscending = true;
@@ -162,30 +164,31 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                   // onChanged: (v) => cubit.load(sort: sort))),
                   // const SizedBox(height: 20.0),
                   Expanded(
-                      child: SingleChildScrollView(
-                          child: SingleChildScrollView(
-                              physics: PageScrollPhysics(),
-                              // dragStartBehavior: DragStartBehavior.down,
-                              scrollDirection: Axis.horizontal,
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    minWidth:
-                                        MediaQuery.of(context).size.width -
-                                            300),
-                                child: DataTable(
-                                  headingRowColor: MaterialStateProperty.all(
-                                      Theme.of(context)
-                                          .primaryColor
-                                          .withOpacity(.2)),
-                                  onSelectAll: source.toggleAllSelection,
-                                  sortColumnIndex: source.sortIndex,
-                                  sortAscending: source.sortAscending,
-                                  showBottomBorder: false,
-                                  showCheckboxColumn: !mini,
-                                  columns: columns, rows: rows,
-                                  // source: source
-                                ),
-                              )))),
+                      // child:
+                      // SingleChildScrollView(
+                      //     child: SingleChildScrollView(
+                      // physics: const PageScrollPhysics(),
+                      // dragStartBehavior: DragStartBehavior.down,
+                      // scrollDirection: Axis.horizontal,
+                      // child: ConstrainedBox(
+                      //     constraints: BoxConstraints(
+                      //         minWidth:
+                      //             MediaQuery.of(context).size.width -
+                      //                 300),
+                      child: DataTable2(
+                    minWidth: minWidth,
+                    // smRatio: 0.5,
+                    // lmRatio: 4.5,
+                    headingRowColor: MaterialStateProperty.all(
+                        Theme.of(context).primaryColor.withOpacity(.2)),
+                    onSelectAll: source.toggleAllSelection,
+                    sortColumnIndex: source.sortIndex,
+                    sortAscending: source.sortAscending,
+                    showBottomBorder: false,
+                    showCheckboxColumn: !mini,
+                    columns: columns, rows: rows,
+                    // source: source
+                  )),
                   if (!mini) const SizedBox(height: 20.0),
                   if (!mini)
                     Row(
