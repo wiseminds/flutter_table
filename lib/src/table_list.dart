@@ -91,7 +91,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               //     body:
               Column(
                 children: [
-                  Row(
+                  if (!mini) Row(
                     children: [
                       Text(title,
                           style: TextStyle(
@@ -102,7 +102,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       // if (!mini)
                     ],
                   ),
-                  const SizedBox(height: 80.0),
+                if (!mini)    const SizedBox(height: 80.0),
                   // 40.0.h,
                   FilterView(
                     mini: mini,
@@ -112,7 +112,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     // },
                   ),
                   // if (!mini) Row(children: [const Spacer(), ...actions]),
-                  if (!mini)
+                
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -136,8 +136,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                     ),
                                 onChanged: source.setQuery)),
                         const Spacer(),
-                        Perpage(source: source),
-                        const SizedBox(width: 20.0),
+                       if (!mini)   Perpage(source: source),
+                         if (!mini) const SizedBox(width: 20.0),
                         ...actions
                       ],
                     ),
