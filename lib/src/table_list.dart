@@ -199,7 +199,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                           bottom: 0,
                           child: ValueListenableBuilder<bool>(
                               valueListenable: source.isLoading,
-                              builder: (c, s, w) => s || source.rowCount > 1
+                              builder: (c, s, w) => s || source.rowCount > 0
                                   ? const SizedBox()
                                   : Column(
                                       mainAxisAlignment:
