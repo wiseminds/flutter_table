@@ -107,7 +107,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                         // if (!mini)
                       ],
                     ),
-                  if (!mini) const SizedBox(height: 80.0),
+                  if (!mini && showTitle) const SizedBox(height: 80.0),
                   // 40.0.h,
                   FilterView(
                     mini: mini,
