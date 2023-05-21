@@ -28,6 +28,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // late PaginatorController paginatorController;
 
   bool sortAscending = true;
+  bool showTitle = true;
   int sortColumnIndex = 0;
   late TableDataSource<T> source;
 
@@ -57,17 +58,20 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = Theme.of(context).brightness == Brightness.dark;
     return Theme(
         data: Theme.of(context).copyWith(
             dataTableTheme: DataTableThemeData(
-              dataTextStyle: source.rowTextStyle,
+              dataTextStyle: source.rowTextStyle
+                  .copyWith(color: isDark ? Colors.white70 : Colors.black87),
               dividerThickness: .5,
               horizontalMargin: 20,
               checkboxHorizontalMargin: 20,
-              dataRowHeight: 70,
+              dataRowMinHeight: 70,
               columnSpacing: 60,
               headingRowHeight: 50,
-              headingTextStyle: source.headerTextStyle,
+              headingTextStyle: source.headerTextStyle
+                  .copyWith(color: isDark ? Colors.white70 : Colors.black87),
             ),
             checkboxTheme: CheckboxThemeData(
               shape: RoundedRectangleBorder(
@@ -91,18 +95,19 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               //     body:
               Column(
                 children: [
-                  if (!mini) Row(
-                    children: [
-                      Text(title,
-                          style: TextStyle(
-                              fontSize: mini ? 20 : 28,
-                              color: Theme.of(context).iconTheme.color,
-                              fontWeight: FontWeight.w500)),
-                      const Spacer(),
-                      // if (!mini)
-                    ],
-                  ),
-                if (!mini)    const SizedBox(height: 80.0),
+                  if (!mini && showTitle)
+                    Row(
+                      children: [
+                        Text(title,
+                            style: TextStyle(
+                                fontSize: mini ? 20 : 28,
+                                color: Theme.of(context).iconTheme.color,
+                                fontWeight: FontWeight.w500)),
+                        const Spacer(),
+                        // if (!mini)
+                      ],
+                    ),
+                  if (!mini) const SizedBox(height: 80.0),
                   // 40.0.h,
                   FilterView(
                     mini: mini,
@@ -112,35 +117,36 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     // },
                   ),
                   // if (!mini) Row(children: [const Spacer(), ...actions]),
-                
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            width: 400,
-                            child: TextFormField(
-                                style: Theme.of(context).textTheme.caption,
-                                decoration: InputDecoration(
-                                    hintText: searchHintText,
-                                    prefixIcon: const Icon(Icons.search),
-                                    hintStyle:
-                                        Theme.of(context).textTheme.caption,
-                                    labelStyle:
-                                        Theme.of(context).textTheme.caption,
-                                    isDense: true,
-                                    fillColor: Colors.transparent,
-                                    filled: true,
-                                    contentPadding: const EdgeInsets.all(10)
-                                    // errorBorder: InputBorder.none,
-                                    // border: InputBorder.none,
-                                    ),
-                                onChanged: source.setQuery)),
-                        const Spacer(),
-                       if (!mini)   Perpage(source: source),
-                         if (!mini) const SizedBox(width: 20.0),
-                        ...actions
-                      ],
-                    ),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                          width: 400,
+                          height: 700,
+                          child: TextFormField(
+                              style: Theme.of(context).textTheme.caption,
+                              decoration: InputDecoration(
+                                  hintText: searchHintText,
+                                  prefixIcon: const Icon(Icons.search),
+                                  hintStyle:
+                                      Theme.of(context).textTheme.caption,
+                                  labelStyle:
+                                      Theme.of(context).textTheme.caption,
+                                  isDense: true,
+                                  fillColor: Colors.transparent,
+                                  filled: true,
+                                  contentPadding: const EdgeInsets.all(10)
+                                  // errorBorder: InputBorder.none,
+                                  // border: InputBorder.none,
+                                  ),
+                              onChanged: source.setQuery)),
+                      const Spacer(),
+                      if (!mini) Perpage(source: source),
+                      if (!mini) const SizedBox(width: 20.0),
+                      ...actions
+                    ],
+                  ),
                   if (source.selected.isNotEmpty && !mini)
                     Material(
                       color: Theme.of(context).primaryColor.withOpacity(.2),

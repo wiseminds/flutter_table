@@ -1,8 +1,7 @@
 import 'dart:math';
- 
-import 'package:data_repository/models/index.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_table/src/preference.dart'; 
+import 'package:flutter_table/src/preference.dart';
 
 import '../models/column_description.dart';
 import '../models/pager.dart';
@@ -36,7 +35,8 @@ abstract class TableDataSource<T> extends BaseTableDataSource<T>
   TableDataSource(super.repository, {int sortIndex = 0}) {
     print('TableDataSource created');
     this.sortIndex = sortIndex;
-     Preference().getInt(Preference.perPage)
+    Preference()
+        .getInt(Preference.perPage)
         .then((value) => perPage.value = value ?? perPage.value);
   }
 
@@ -71,11 +71,12 @@ abstract class TableDataSource<T> extends BaseTableDataSource<T>
     });
     isLoading.value = false;
     if (!response.isSuccessful) {
-      await Future.delayed(const Duration(milliseconds: 1000));
-      throw (response.error as ApiError?)?.message ?? 'An error occurred';
+      return;
+
+      // throw (res .ponse.error as ApiError?)?.message ?? 'An error occurred';
     }
     var pagination = response.pagination;
-    print('pagination: $pagination, $page');
+    print('pagination: ${response.body} $pagination, $page');
     if (pagination != null) {
       pager.value = Pager(
           page: pagination.page, // ?? 1,
