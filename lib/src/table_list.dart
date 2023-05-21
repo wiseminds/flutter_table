@@ -88,7 +88,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
           padding:
               EdgeInsets.only(bottom: padding, left: padding, right: padding),
           child: Stack(
-            // fit: StackFit.expand,
+            fit: StackFit.expand,
             children: [
               // NestedScrollView(
               //     headerSliverBuilder: (context, innerBoxIsScrolled) => [],

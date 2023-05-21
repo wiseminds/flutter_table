@@ -54,6 +54,8 @@ abstract class TableDataSource<T> extends BaseTableDataSource<T>
   String get sortColumn => column[sortIndex].key;
   List<DataCell> getCells(int i) => [];
 
+
+
   TextStyle get rowTextStyle =>
       const TextStyle(fontSize: 12, color: Colors.black87);
   TextStyle get headerTextStyle => const TextStyle(
