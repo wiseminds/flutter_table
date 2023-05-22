@@ -67,7 +67,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               dividerThickness: .5,
               horizontalMargin: 20,
               checkboxHorizontalMargin: 20,
-              dataRowMinHeight: 70,
+              // dataRowMinHeight: 90,
               columnSpacing: 60,
               headingRowHeight: 50,
               headingTextStyle: source.headerTextStyle
@@ -123,16 +123,16 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     children: [
                       SizedBox(
                           width: 400,
-                          height: 700,
+                          height: 70,
                           child: TextFormField(
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.bodySmall,
                               decoration: InputDecoration(
                                   hintText: searchHintText,
                                   prefixIcon: const Icon(Icons.search),
                                   hintStyle:
-                                      Theme.of(context).textTheme.caption,
+                                      Theme.of(context).textTheme.bodySmall,
                                   labelStyle:
-                                      Theme.of(context).textTheme.caption,
+                                      Theme.of(context).textTheme.bodySmall,
                                   isDense: true,
                                   fillColor: Colors.transparent,
                                   filled: true,
@@ -181,7 +181,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       //         minWidth:
                       //             MediaQuery.of(context).size.width -
                       //                 300),
-                      child: Stack(
+                      child: Stack(fit: StackFit.expand,
                     children: [
                       DataTable2(
                         minWidth: minWidth,
