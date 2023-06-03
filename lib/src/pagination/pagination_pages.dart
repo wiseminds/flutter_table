@@ -10,13 +10,12 @@ class PaginationPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     return ValueListenableBuilder<Pager?>(
         valueListenable: source.pager,
         builder: (context, s, w) {
           // print('mmmmmmmmmm:  ${s?.total}, ${s?.pages} ${s?.page}');
           if (s == null || s.pages <= 1) {
-            return  const SizedBox();
+            return const SizedBox();
           }
           // var pages = List.generate(s.pages, (index) => index +1);
           //
@@ -25,7 +24,9 @@ class PaginationPages extends StatelessWidget {
               PaginationButton(
                 display: Text('$i',
                     style: Theme.of(context).textTheme.caption?.copyWith(
-                        color: i == s.page ? Colors.white : Colors.black)),
+                        color: i == s.page
+                            ? Colors.white
+                            : Theme.of(context).textTheme?.bodySmall?.color)),
                 onPressed: () => source.toPage(i),
                 isActive: i == s.page,
               )
@@ -54,7 +55,7 @@ class PaginationPages extends StatelessWidget {
             //     .toList();
           }
           return Row(
-            children: [ 
+            children: [
               if (s.page > 1)
                 PaginationButton(
                     display: const Icon(Icons.arrow_back_ios_new, size: 12),
@@ -85,7 +86,9 @@ class PaginationButton extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(4.0),
         child: Material(
-          color: isActive ? Theme.of(context).primaryColor : Colors.white,
+          color: isActive
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).cardColor,
           shape: RoundedRectangleBorder(
               side: BorderSide(width: .2, color: Colors.grey.shade700),
               borderRadius: BorderRadius.circular(2)),

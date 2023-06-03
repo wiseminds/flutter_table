@@ -54,12 +54,13 @@ abstract class TableDataSource<T> extends BaseTableDataSource<T>
   String get sortColumn => column[sortIndex].key;
   List<DataCell> getCells(int i) => [];
 
-
-
-  TextStyle get rowTextStyle =>
-      const TextStyle(fontSize: 12, color: Colors.black87);
+  TextStyle get rowTextStyle => const TextStyle(
+        fontSize: 12,
+      );
   TextStyle get headerTextStyle => const TextStyle(
-      fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black87);
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+      );
 
   @override
   Future load([int? page]) async {

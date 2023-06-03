@@ -17,10 +17,10 @@ class Perpage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('show',
-                  style: Theme.of(context).textTheme.caption?.copyWith()),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith()),
             ),
             Material(
-              color: Colors.white,
+              // color: Colors.white,
               shape: const RoundedRectangleBorder(side: BorderSide(width: .1)),
               child: Padding(
                   padding:
@@ -36,13 +36,25 @@ class Perpage extends StatelessWidget {
                     isDense: true,
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .bodySmall
                         ?.copyWith(fontSize: 10),
-                    items: const [
-                      DropdownMenuItem(child: Text('10'), value: 10),
-                      DropdownMenuItem(child: Text('20'), value: 20),
-                      DropdownMenuItem(child: Text('50'), value: 50),
-                      DropdownMenuItem(child: Text('100'), value: 100),
+                    items: [
+                      DropdownMenuItem(
+                          child: Text('10',
+                              style: Theme.of(context).textTheme.bodySmall),
+                          value: 10),
+                      DropdownMenuItem(
+                          child: Text('20',
+                              style: Theme.of(context).textTheme.bodySmall),
+                          value: 20),
+                      DropdownMenuItem(
+                          child: Text('50',
+                              style: Theme.of(context).textTheme.bodySmall),
+                          value: 50),
+                      DropdownMenuItem(
+                          child: Text('100',
+                              style: Theme.of(context).textTheme.bodySmall),
+                          value: 100),
                       // DropdownMenuItem(child: Text('200'), value: 200),
                       // DropdownMenuItem(child: Text('500'), value: 500),
                       // DropdownMenuItem(child: Text('1000'), value: 1000),
@@ -52,7 +64,7 @@ class Perpage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text('entities',
-                  style: Theme.of(context).textTheme.caption?.copyWith()),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith()),
             ),
           ]);
         });
