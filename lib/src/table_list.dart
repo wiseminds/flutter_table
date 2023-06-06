@@ -44,9 +44,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
     // selectedCubit = SelectedCubit();
     // paginatorController = PaginatorController();
     super.initState();
-    source
-      ..load()
-      ..addListener(_handleDataSourceChanged);
+    source.addListener(_handleDataSourceChanged);
+    Future.delayed(const Duration(milliseconds: 500), source.load);
   }
 
   @override
@@ -119,52 +118,54 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                   // if (!mini) Row(children: [const Spacer(), ...actions]),
 
                   LayoutBuilder(builder: (context, cons) {
+                    var search = SizedBox(
+                        width: 400,
+                        height: 70,
+                        child: TextFormField(
+                            style: Theme.of(context).textTheme.bodySmall,
+                            decoration: InputDecoration(
+                                hintText: searchHintText,
+                                prefixIcon: const Icon(Icons.search),
+                                hintStyle:
+                                    Theme.of(context).textTheme.bodySmall,
+                                labelStyle:
+                                    Theme.of(context).textTheme.bodySmall,
+                                isDense: true,
+                                fillColor: Colors.transparent,
+                                filled: true,
+                                contentPadding: const EdgeInsets.all(10)
+                                // errorBorder: InputBorder.none,
+                                // border: InputBorder.none,
+                                ),
+                            onChanged: source.setQuery));
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         if (cons.maxWidth < 800)
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Spacer(),
-                              if (!mini) Perpage(source: source),
+                              // if (!mini) Perpage(source: source),
                               if (!mini) const SizedBox(width: 20.0),
                               ...actions
                             ],
                           ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                                width: 400,
-                                height: 70,
-                                child: TextFormField(
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                    decoration: InputDecoration(
-                                        hintText: searchHintText,
-                                        prefixIcon: const Icon(Icons.search),
-                                        hintStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                        isDense: true,
-                                        fillColor: Colors.transparent,
-                                        filled: true,
-                                        contentPadding: const EdgeInsets.all(10)
-                                        // errorBorder: InputBorder.none,
-                                        // border: InputBorder.none,
-                                        ),
-                                    onChanged: source.setQuery)),
-                            if (cons.maxWidth >= 800) const Spacer(),
-                            if (!mini || (cons.maxWidth >= 800))
-                              Perpage(source: source),
-                            if (!mini || (cons.maxWidth >= 800))
-                              const SizedBox(width: 20.0),
-                            ...actions
-                          ],
-                        ),
+                        if (cons.maxWidth < 800)
+                          search
+                        else
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              search,
+                              if (cons.maxWidth >= 800) const Spacer(),
+                              if (!mini || (cons.maxWidth >= 800))
+                                Perpage(source: source),
+                              if (!mini || (cons.maxWidth >= 800))
+                                const SizedBox(width: 20.0),
+                              ...actions
+                            ],
+                          ),
                       ],
                     );
                   }),
