@@ -117,7 +117,16 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     // },
                   ),
                   // if (!mini) Row(children: [const Spacer(), ...actions]),
-
+                  if (MediaQuery.of(context).size.width < 800)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Spacer(),
+                        if (!mini) Perpage(source: source),
+                        if (!mini) const SizedBox(width: 20.0),
+                        ...actions
+                      ],
+                    ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -141,9 +150,11 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                   // border: InputBorder.none,
                                   ),
                               onChanged: source.setQuery)),
-                      const Spacer(),
-                      if (!mini) Perpage(source: source),
-                      if (!mini) const SizedBox(width: 20.0),
+                      if (MediaQuery.of(context).size.width >= 800)
+                        const Spacer(),
+                      if (!mini || (MediaQuery.of(context).size.width >= 800))
+                        Perpage(source: source),
+                      if (!mini || (MediaQuery.of(context).size.width >= 800)) const SizedBox(width: 20.0),
                       ...actions
                     ],
                   ),
@@ -181,7 +192,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       //         minWidth:
                       //             MediaQuery.of(context).size.width -
                       //                 300),
-                      child: Stack(fit: StackFit.expand,
+                      child: Stack(
+                    fit: StackFit.expand,
                     children: [
                       DataTable2(
                         minWidth: minWidth,
