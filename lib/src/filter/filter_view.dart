@@ -44,8 +44,11 @@ class _FilterViewState extends State<FilterView> {
             const SizedBox(width: 20.0),
             IconButton(
                 onPressed: () {
-                  filterKeys.add(UniqueKey());
-                  setState(() {});
+                  if (widget.source.filterDescription.length >
+                      filterKeys.length) {
+                    filterKeys.add(UniqueKey());
+                    setState(() {});
+                  }
                 },
                 icon: const Icon(Icons.add)),
           ],
@@ -57,7 +60,8 @@ class _FilterViewState extends State<FilterView> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: FilterItem(
-              isLasItem: i == filterKeys.length - 1,
+              showAddButton: i == filterKeys.length - 1 &&
+                  widget.source.filterDescription.length > filterKeys.length,
               // && filterKeys.length > 1,
               key: filterKeys[i],
               onRemove: () {
@@ -99,7 +103,7 @@ class _FilterViewState extends State<FilterView> {
                           .updateFilter(_filters.value.values.toList());
                     },
                     child: const Text('Apply')),
-                const SizedBox(width: 20.0),
+                const SizedBox(width: 10.0),
                 OutlinedButton(
                     onPressed: () {
                       filterKeys = [];
@@ -111,7 +115,7 @@ class _FilterViewState extends State<FilterView> {
                     child: const Text('Clear'))
               ]),
         ),
-      // const SizedBox(height: 30.0)
+      const SizedBox(height: 30.0)
     ]);
   }
 }
@@ -120,14 +124,14 @@ class FilterItem extends StatefulWidget {
   final List<FilterDescription> description;
   final Function(Filter) onChanged;
   final Function() onRemove, onAdd;
-  final bool isLasItem;
+  final bool showAddButton;
   const FilterItem(
       {Key? key,
       required this.description,
       required this.onChanged,
       required this.onRemove,
       required this.onAdd,
-      this.isLasItem = false})
+      this.showAddButton = false})
       : super(key: key);
 
   @override
@@ -153,7 +157,7 @@ class _FilterItemState extends State<FilterItem> {
                     runAlignment: WrapAlignment.start,
                     alignment: WrapAlignment.start,
                     children: [
-                      if (widget.isLasItem)
+                      if (widget.showAddButton)
                         IconButton(
                             onPressed: widget.onAdd,
                             icon: const Icon(Icons.add)),
@@ -316,11 +320,11 @@ class _FilterItemState extends State<FilterItem> {
                                             underline: const SizedBox(),
                                             isDense: true,
                                             style: style,
-                                            items: [
-                                              const DropdownMenuItem(
+                                            items: const [
+                                              DropdownMenuItem(
                                                   value: true,
                                                   child: Text('true')),
-                                              const DropdownMenuItem(
+                                              DropdownMenuItem(
                                                   value: false,
                                                   child: Text('false')),
                                             ],
