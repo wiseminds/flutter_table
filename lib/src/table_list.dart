@@ -112,12 +112,13 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     FilterView(
                       mini: mini,
                       source: source,
+                      empty:    SizedBox(height:(!mini && showTitle)? 60.0 : 0),
                       // onChanged: (filter) {
                       //   source.setFilter(filter);
                       // },
                     ),
                   ]),
-                  if (!mini && showTitle) const SizedBox(height: 60.0),
+                  // if (!mini && showTitle) const SizedBox(height: 60.0),
                   // 40.0.h,
 
                   // if (!mini) Row(children: [const Spacer(), ...actions]),

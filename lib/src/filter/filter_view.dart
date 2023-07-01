@@ -8,7 +8,9 @@ import 'filter_description.dart';
 class FilterView extends StatefulWidget {
   final TableDataSource source;
   final bool mini;
-  const FilterView({Key? key, required this.source, required this.mini})
+  final Widget empty;
+  const FilterView(
+      {Key? key, required this.source, required this.mini, required this.empty})
       : super(key: key);
 
   @override
@@ -29,10 +31,10 @@ class _FilterViewState extends State<FilterView> {
   @override
   Widget build(BuildContext context) {
     if (widget.mini || widget.source.filterDescription.isEmpty) {
-      return const SizedBox();
+      return widget.empty;
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-      const SizedBox(height: 30),
+      // const SizedBox(height: 30),
       SizedBox(
         width: 300,
         child: Row(
@@ -93,7 +95,8 @@ class _FilterViewState extends State<FilterView> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      widget.source.updateFilter(_filters.value.values.toList());
+                      widget.source
+                          .updateFilter(_filters.value.values.toList());
                     },
                     child: const Text('Apply')),
                 const SizedBox(width: 20.0),
@@ -101,7 +104,8 @@ class _FilterViewState extends State<FilterView> {
                     onPressed: () {
                       filterKeys = [];
                       _filters.value = {};
-                      widget.source.updateFilter(_filters.value.values.toList());
+                      widget.source
+                          .updateFilter(_filters.value.values.toList());
                       setState(() {});
                     },
                     child: const Text('Clear'))
