@@ -31,11 +31,13 @@ class _FilterViewState extends State<FilterView> {
     if (widget.mini || widget.source.filterDescription.isEmpty) {
       return const SizedBox();
     }
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      const SizedBox(height: 30),
       SizedBox(
         width: 300,
         child: Row(
           children: [
+            const Spacer(),
             const Text('Filters'),
             const SizedBox(width: 20.0),
             IconButton(
@@ -44,7 +46,6 @@ class _FilterViewState extends State<FilterView> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.add)),
-            const Spacer()
           ],
         ),
       ),
@@ -83,27 +84,27 @@ class _FilterViewState extends State<FilterView> {
               },
             ),
           ),
-      const SizedBox(height: 40.0),
+      const SizedBox(height: 20.0),
       if (filterKeys.isNotEmpty)
         Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  widget.source.updateFilter(_filters.value.values.toList());
-                },
-                child: const Text('Apply')),
-            SizedBox(width: 20.0),
-            OutlinedButton(
-                onPressed: () {
-                  filterKeys = [];
-                  _filters.value = {};
-                  widget.source.updateFilter(_filters.value.values.toList());
-                  setState(() {});
-                },
-                child: const Text('Clear')),
-          ],
-        )
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    widget.source.updateFilter(_filters.value.values.toList());
+                  },
+                  child: const Text('Apply')),
+              const SizedBox(width: 20.0),
+              OutlinedButton(
+                  onPressed: () {
+                    filterKeys = [];
+                    _filters.value = {};
+                    widget.source.updateFilter(_filters.value.values.toList());
+                    setState(() {});
+                  },
+                  child: const Text('Clear'))
+            ]),
+      const SizedBox(height: 30.0)
     ]);
   }
 }
@@ -133,7 +134,7 @@ class _FilterItemState extends State<FilterItem> {
 
   @override
   Widget build(BuildContext context) {
-    var style = Theme.of(context).textTheme.caption?.copyWith(fontSize: 10);
+    var style = Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10);
     return ValueListenableBuilder(
         valueListenable: selected,
         builder: (c, s, w) {
@@ -145,8 +146,15 @@ class _FilterItemState extends State<FilterItem> {
                     runAlignment: WrapAlignment.start,
                     alignment: WrapAlignment.start,
                     children: [
+                      if (widget.isLasItem)
+                        IconButton(
+                            onPressed: widget.onAdd,
+                            icon: const Icon(Icons.add)),
+                      IconButton(
+                          onPressed: widget.onRemove,
+                          icon: const Icon(Icons.remove_circle)),
                       Material(
-                        color: Colors.white,
+                        // color: Colors.white,
                         shape: const RoundedRectangleBorder(
                             side: BorderSide(width: .1)),
                         child: Padding(
@@ -156,6 +164,7 @@ class _FilterItemState extends State<FilterItem> {
                                 width: 100,
                                 child: DropdownButton<FilterDescription>(
                                   isExpanded: true,
+                                  // dropdownColor: Theme.of(context).canvasColor,
                                   onChanged: (val) {
                                     selected.value = val;
                                     queryOperator.value = null;
@@ -170,13 +179,13 @@ class _FilterItemState extends State<FilterItem> {
                                   items: [
                                     for (var item in widget.description)
                                       DropdownMenuItem(
-                                          child: Text(item.label), value: item),
+                                          value: item, child: Text(item.label)),
                                   ],
                                 ))),
                       ),
                       const SizedBox(width: 10),
                       Material(
-                        color: Colors.white,
+                        // color: Colors.white,
                         shape: const RoundedRectangleBorder(
                             side: BorderSide(width: .1)),
                         child: Padding(
@@ -200,11 +209,11 @@ class _FilterItemState extends State<FilterItem> {
                                       for (var item
                                           in selected.value!.type.options)
                                         DropdownMenuItem(
-                                            child: Text(item.label),
-                                            value: item)
+                                            value: item,
+                                            child: Text(item.label))
                                     else
                                       const DropdownMenuItem(
-                                          child: Text('Operator'), value: null),
+                                          value: null, child: Text('Operator')),
                                   ],
                                 ))),
                       ),
@@ -225,11 +234,12 @@ class _FilterItemState extends State<FilterItem> {
                       //         style: style,
                       //       )),
                       // ),
+
                       if ((selected.value?.dropdownItems.length ?? 0) > 0)
                         ValueListenableBuilder(
                             valueListenable: query,
                             builder: (c, s, w) => Material(
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   shape: const RoundedRectangleBorder(
                                       side: BorderSide(width: .1)),
                                   child: Padding(
@@ -274,7 +284,7 @@ class _FilterItemState extends State<FilterItem> {
                         ValueListenableBuilder(
                             valueListenable: query,
                             builder: (c, s, w) => Material(
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   shape: const RoundedRectangleBorder(
                                       side: BorderSide(width: .1)),
                                   child: Padding(
@@ -301,19 +311,19 @@ class _FilterItemState extends State<FilterItem> {
                                             style: style,
                                             items: [
                                               const DropdownMenuItem(
-                                                  child: Text('true'),
-                                                  value: true),
+                                                  value: true,
+                                                  child: Text('true')),
                                               const DropdownMenuItem(
-                                                  child: Text('false'),
-                                                  value: false),
+                                                  value: false,
+                                                  child: Text('false')),
                                             ],
                                           ))),
                                 ))
                       else if (selected.value?.type == FilterDataType.string)
                         Material(
-                            color: Colors.white,
+                            // color: Colors.white,
                             shape: const RoundedRectangleBorder(
-                                side: const BorderSide(width: .1)),
+                                side: BorderSide(width: .1)),
                             child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 8.0),
@@ -340,9 +350,9 @@ class _FilterItemState extends State<FilterItem> {
                                     ))))
                       else if (selected.value?.type == FilterDataType.integer)
                         Material(
-                            color: Colors.white,
+                            // color: Colors.white,
                             shape: const RoundedRectangleBorder(
-                                side: const BorderSide(width: .1)),
+                                side: BorderSide(width: .1)),
                             child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 8.0),
@@ -370,14 +380,6 @@ class _FilterItemState extends State<FilterItem> {
                                             isDense: true),
                                       ),
                                     )))),
-
-                      IconButton(
-                          onPressed: widget.onRemove,
-                          icon: const Icon(Icons.remove_circle)),
-                      if (widget.isLasItem)
-                        IconButton(
-                            onPressed: widget.onAdd,
-                            icon: const Icon(Icons.add)),
                     ]);
               });
         });

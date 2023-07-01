@@ -103,18 +103,23 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                 color: Theme.of(context).iconTheme.color,
                                 fontWeight: FontWeight.w500)),
                         const Spacer(),
+
                         // if (!mini)
                       ],
                     ),
-                  if (!mini && showTitle) const SizedBox(height: 80.0),
+                  Row(children: [
+                    const Spacer(),
+                    FilterView(
+                      mini: mini,
+                      source: source,
+                      // onChanged: (filter) {
+                      //   source.setFilter(filter);
+                      // },
+                    ),
+                  ]),
+                  if (!mini && showTitle) const SizedBox(height: 60.0),
                   // 40.0.h,
-                  FilterView(
-                    mini: mini,
-                    source: source,
-                    // onChanged: (filter) {
-                    //   source.setFilter(filter);
-                    // },
-                  ),
+
                   // if (!mini) Row(children: [const Spacer(), ...actions]),
 
                   LayoutBuilder(builder: (context, cons) {

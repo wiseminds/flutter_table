@@ -31,7 +31,7 @@ class FilterDescription extends Equatable {
   final FilterDataType type;
   final List<DropdownMenuItem> dropdownItems;
 
-  FilterDescription(this.key, this.label, this.type,
+  const FilterDescription(this.key, this.label, this.type,
       [this.dropdownItems = const []]);
 
   @override
