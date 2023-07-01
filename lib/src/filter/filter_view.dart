@@ -93,7 +93,7 @@ class _FilterViewState extends State<FilterView> {
       // const SizedBox(height: 20.0),
       if (filterKeys.isNotEmpty)
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Row(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -103,7 +103,7 @@ class _FilterViewState extends State<FilterView> {
                           .updateFilter(_filters.value.values.toList());
                     },
                     child: const Text('Apply')),
-                const SizedBox(width: 10.0),
+                const SizedBox(width: 20.0),
                 OutlinedButton(
                     onPressed: () {
                       filterKeys = [];
