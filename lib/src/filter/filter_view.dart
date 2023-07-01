@@ -84,27 +84,30 @@ class _FilterViewState extends State<FilterView> {
               },
             ),
           ),
-      const SizedBox(height: 20.0),
+      // const SizedBox(height: 20.0),
       if (filterKeys.isNotEmpty)
-        Row(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    widget.source.updateFilter(_filters.value.values.toList());
-                  },
-                  child: const Text('Apply')),
-              const SizedBox(width: 20.0),
-              OutlinedButton(
-                  onPressed: () {
-                    filterKeys = [];
-                    _filters.value = {};
-                    widget.source.updateFilter(_filters.value.values.toList());
-                    setState(() {});
-                  },
-                  child: const Text('Clear'))
-            ]),
-      const SizedBox(height: 30.0)
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      widget.source.updateFilter(_filters.value.values.toList());
+                    },
+                    child: const Text('Apply')),
+                const SizedBox(width: 20.0),
+                OutlinedButton(
+                    onPressed: () {
+                      filterKeys = [];
+                      _filters.value = {};
+                      widget.source.updateFilter(_filters.value.values.toList());
+                      setState(() {});
+                    },
+                    child: const Text('Clear'))
+              ]),
+        ),
+      // const SizedBox(height: 30.0)
     ]);
   }
 }
