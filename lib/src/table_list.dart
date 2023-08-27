@@ -19,6 +19,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   final bool mini;
   String get searchHintText => 'Search';
 
+  CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
+
   TableListState({this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
@@ -76,8 +78,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1)),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              side: MaterialStateBorderSide.resolveWith(
-                  (_) => const BorderSide(width: .4, color: Colors.blueGrey)),
+              side: MaterialStateBorderSide.resolveWith((_) => BorderSide(
+                  width: .4, color: isDark ? Colors.white70 : Colors.black87)),
               fillColor: MaterialStateProperty.all(
                 Theme.of(context).primaryColor,
               ),
@@ -112,7 +114,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     FilterView(
                       mini: mini,
                       source: source,
-                      empty:    SizedBox(height:(!mini && showTitle)? 60.0 : 0),
+                      empty: SizedBox(height: (!mini && showTitle) ? 60.0 : 0),
                       // onChanged: (filter) {
                       //   source.setFilter(filter);
                       // },
@@ -215,6 +217,41 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                     children: [
                       DataTable2(
                         minWidth: minWidth,
+
+                        datarowCheckboxTheme: datarowCheckboxTheme ??
+                            CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(1)),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                              side: MaterialStateBorderSide.resolveWith((_) =>
+                                  BorderSide(
+                                      width: .4,
+                                      color: isDark
+                                          ? Colors.white70
+                                          : Colors.black87)),
+                              fillColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              checkColor: MaterialStateProperty.all(
+                                  isDark ? Colors.white70 : Colors.black87),
+                            ),
+                        headingCheckboxTheme: headingCheckboxTheme ??
+                            CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(1)),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                              side: MaterialStateBorderSide.resolveWith((_) =>
+                                  BorderSide(
+                                      width: .4,
+                                      color: isDark
+                                          ? Colors.white70
+                                          : Colors.black87)),
+                              fillColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              checkColor: MaterialStateProperty.all(
+                                  isDark ? Colors.white70 : Colors.black87),
+                            ),
 
                         // smRatio: 0.5,
                         // lmRatio: 4.5,
