@@ -172,7 +172,7 @@ class _FilterItemState extends State<FilterItem> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 8.0),
                             child: SizedBox(
-                                width: 100,
+                                width: 150,
                                 child: DropdownButton<FilterDescription>(
                                   isExpanded: true,
                                   // dropdownColor: Theme.of(context).canvasColor,
@@ -203,7 +203,7 @@ class _FilterItemState extends State<FilterItem> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 8.0),
                             child: SizedBox(
-                                width: 100,
+                                width: 150,
                                 child: DropdownButton<FilterOption>(
                                   isExpanded: true,
                                   onChanged: (val) {
@@ -257,7 +257,7 @@ class _FilterItemState extends State<FilterItem> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 8.0),
                                       child: SizedBox(
-                                          width: 100,
+                                          width: 150,
                                           child: Builder(builder: (context) {
                                             // Type T = selected
                                             //     .value!
@@ -302,7 +302,7 @@ class _FilterItemState extends State<FilterItem> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 8.0),
                                       child: SizedBox(
-                                          width: 100,
+                                          width: 150,
                                           child: DropdownButton<bool>(
                                             isExpanded: true,
                                             onChanged: (val) {
@@ -339,7 +339,7 @@ class _FilterItemState extends State<FilterItem> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 8.0),
                                 child: SizedBox(
-                                    width: 100,
+                                    width: 150,
                                     height: 24,
                                     child: Center(
                                       child: TextFormField(
@@ -368,7 +368,7 @@ class _FilterItemState extends State<FilterItem> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 8.0),
                                 child: SizedBox(
-                                    width: 100,
+                                    width: 150,
                                     height: 24,
                                     child: Center(
                                       child: TextFormField(
