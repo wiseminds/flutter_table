@@ -23,10 +23,10 @@ class PaginationPages extends StatelessWidget {
             for (var i = 1; i <= s.pages; i++)
               PaginationButton(
                 display: Text('$i',
-                    style: Theme.of(context).textTheme.caption?.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: i == s.page
                             ? Colors.white
-                            : Theme.of(context).textTheme?.bodySmall?.color)),
+                            : Theme.of(context).textTheme.bodySmall?.color)),
                 onPressed: () => source.toPage(i),
                 isActive: i == s.page,
               )
@@ -38,7 +38,7 @@ class PaginationPages extends StatelessWidget {
                 display: Text('${s.page}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .bodySmall
                         ?.copyWith(color: Colors.white)),
                 onPressed: () => source.toPage(s.page),
                 isActive: true,
