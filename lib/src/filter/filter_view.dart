@@ -353,6 +353,7 @@ class _FilterItemState extends State<FilterItem> {
                                           // source.setPerPage(val ?? source.perPage.value);
                                         },
                                         decoration: InputDecoration(
+                                           contentPadding: EdgeInsets.all(10),
                                             border: InputBorder.none,
                                             hintText: 'query',
                                             hintStyle: style,
