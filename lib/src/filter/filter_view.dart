@@ -339,7 +339,7 @@ class _FilterItemState extends State<FilterItem> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 8.0),
                                 child: SizedBox(
-                                    width: 150,
+                                    width: 250,
                                     height: 24,
                                     child: Center(
                                       child: TextFormField(
