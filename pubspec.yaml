@@ -16,7 +16,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   # get_it: ^7.2.0
   hive: ^2.2.3
-  data_table_2: ^2.5.7
+  data_table_2: ^2.6.0
 
 dev_dependencies:
   flutter_test:
