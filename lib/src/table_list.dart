@@ -18,13 +18,13 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // late TableRepository<T> repository;
   final bool mini, showPerpageOnTop;
   String get searchHintText => 'Search';
-   Color? get headerColor => null;
-   Color? get backgroundColor => null;
-   Color? get dividerColor => null;
+  Color? get headerColor => null;
+  Color? get backgroundColor => null;
+  Color? get dividerColor => null;
 
   CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
 
-  TableListState({ this.showPerpageOnTop =true,this.mini = false});
+  TableListState({this.showPerpageOnTop = true, this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
   // double? get height => MediaQuery.of(context).size.height - 100;
@@ -65,7 +65,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
     var isDark = Theme.of(context).brightness == Brightness.dark;
     return Theme(
         data: Theme.of(context).copyWith(
-            dataTableTheme: DataTableThemeData( 
+            dataTableTheme: DataTableThemeData(
               dataTextStyle: source.rowTextStyle
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
               dividerThickness: .5,
@@ -172,7 +172,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                             children: [
                               search,
                               if (cons.maxWidth >= 800) const Spacer(),
-                              if  (showPerpageOnTop && (!mini || (cons.maxWidth >= 800)))
+                              if (showPerpageOnTop &&
+                                  (!mini || (cons.maxWidth >= 800)))
                                 Perpage(source: source),
                               if (!mini || (cons.maxWidth >= 800))
                                 const SizedBox(width: 20.0),
@@ -218,13 +219,13 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       //             MediaQuery.of(context).size.width -
                       //                 300),
                       child: Material(
-                        color:backgroundColor?? Colors.transparent,
-                        child: Stack(
-                                            fit: StackFit.expand,
-                                            children: [
+                    color: backgroundColor ?? Colors.transparent,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
                         DataTable2(
                           minWidth: minWidth,
-                        
+
                           datarowCheckboxTheme: datarowCheckboxTheme ??
                               CheckboxThemeData(
                                 shape: RoundedRectangleBorder(
@@ -258,15 +259,23 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                     WidgetStateProperty.all(Colors.transparent),
                                 checkColor: WidgetStateProperty.all(
                                     isDark ? Colors.white70 : Colors.black87),
-                              ),border: TableBorder(
-                                bottom: BorderSide(color: dividerColor?? Colors.transparent)
                               ),
-                              
-                        
+                          border: TableBorder(
+                              bottom: BorderSide(
+                                  color: dividerColor ?? Colors.transparent)),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color:
+                                          dividerColor ?? Colors.transparent))),
+
                           // smRatio: 0.5,
                           // lmRatio: 4.5,
-                          headingRowColor: WidgetStateProperty.all(headerColor ??
-                              Theme.of(context).primaryColor.withValues(alpha:.2)),
+                          headingRowColor: WidgetStateProperty.all(
+                              headerColor ??
+                                  Theme.of(context)
+                                      .primaryColor
+                                      .withValues(alpha: .2)),
                           onSelectAll: source.toggleAllSelection,
                           sortColumnIndex: source.sortIndex,
                           sortAscending: source.sortAscending,
@@ -291,7 +300,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                         children: [
                                             const SizedBox(height: 20),
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Icon(
                                                 Icons.search,
                                                 size: 90,
@@ -302,9 +312,9 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                             const SizedBox(height: 10),
                                             const Text('No data here')
                                           ]))),
-                                            ],
-                                          ),
-                      )),
+                      ],
+                    ),
+                  )),
                   if (!mini) const SizedBox(height: 20.0),
                   if (!mini)
                     Row(
