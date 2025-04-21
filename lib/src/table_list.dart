@@ -76,7 +76,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               headingRowHeight: 50,
               headingTextStyle: source.headerTextStyle
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
-            ),dividerColor: dividerColor,
+            ),
             checkboxTheme: CheckboxThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1)),
@@ -258,12 +258,15 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                     WidgetStateProperty.all(Colors.transparent),
                                 checkColor: WidgetStateProperty.all(
                                     isDark ? Colors.white70 : Colors.black87),
+                              ),border: TableBorder(
+                                bottom: BorderSide(color: dividerColor?? Colors.transparent)
                               ),
+                              
                         
                           // smRatio: 0.5,
                           // lmRatio: 4.5,
                           headingRowColor: WidgetStateProperty.all(headerColor ??
-                              Theme.of(context).primaryColor.withOpacity(.2)),
+                              Theme.of(context).primaryColor.withValues(alpha:.2)),
                           onSelectAll: source.toggleAllSelection,
                           sortColumnIndex: source.sortIndex,
                           sortAscending: source.sortAscending,
