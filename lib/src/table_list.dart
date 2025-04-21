@@ -70,7 +70,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
               dividerThickness: .5,
               horizontalMargin: 20,
-              checkboxHorizontalMargin: 20, dataRowMaxHeight: 60,
+              checkboxHorizontalMargin: 20, dataRowMaxHeight: 80,
               // dataRowMinHeight: 90,
               columnSpacing: 60,
               headingRowHeight: 60,
@@ -264,8 +264,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                               horizontalInside: BorderSide(
                                   width: 1,
                                   color: dividerColor ?? Colors.transparent),
-                              top: BorderSide(
-                                  color: dividerColor ?? Colors.transparent),
+                              top: const BorderSide(
+                                  width: .1, color: Colors.transparent),
                               bottom: BorderSide(
                                   color: dividerColor ?? Colors.transparent)),
 
