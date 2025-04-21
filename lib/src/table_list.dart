@@ -18,10 +18,11 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // late TableRepository<T> repository;
   final bool mini;
   String get searchHintText => 'Search';
+  final Color? headerColor, backgroundColor;
 
   CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
 
-  TableListState({this.mini = false});
+  TableListState({this.headerColor, this.backgroundColor, this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
   // double? get height => MediaQuery.of(context).size.height - 100;
@@ -78,12 +79,12 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1)),
               materialTapTargetSize: MaterialTapTargetSize.padded,
-              side: MaterialStateBorderSide.resolveWith((_) => BorderSide(
+              side: WidgetStateBorderSide.resolveWith((_) => BorderSide(
                   width: .4, color: isDark ? Colors.white70 : Colors.black87)),
-              fillColor: MaterialStateProperty.all(
+              fillColor: WidgetStateProperty.all(
                 Theme.of(context).primaryColor,
               ),
-              checkColor: MaterialStateProperty.all(Colors.white),
+              checkColor: WidgetStateProperty.all(Colors.white),
             )),
         child: Padding(
           padding:
@@ -109,17 +110,19 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                         // if (!mini)
                       ],
                     ),
-                  Row(children: [
-                    const Spacer(),
-                    FilterView(
-                      mini: mini,
-                      source: source,
-                      empty: SizedBox(height: (!mini && showTitle) ? 60.0 : 0),
-                      // onChanged: (filter) {
-                      //   source.setFilter(filter);
-                      // },
-                    ),
-                  ]),
+                  if (!(mini || source.filterDescription.isEmpty))
+                    Row(children: [
+                      const Spacer(),
+                      FilterView(
+                        mini: mini,
+                        source: source,
+                        empty:
+                            SizedBox(height: (!mini && showTitle) ? 60.0 : 0),
+                        // onChanged: (filter) {
+                        //   source.setFilter(filter);
+                        // },
+                      ),
+                    ]),
                   // if (!mini && showTitle) const SizedBox(height: 60.0),
                   // 40.0.h,
 
@@ -224,15 +227,15 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                   borderRadius: BorderRadius.circular(1)),
                               materialTapTargetSize:
                                   MaterialTapTargetSize.padded,
-                              side: MaterialStateBorderSide.resolveWith((_) =>
+                              side: WidgetStateBorderSide.resolveWith((_) =>
                                   BorderSide(
                                       width: .4,
                                       color: isDark
                                           ? Colors.white70
                                           : Colors.black87)),
                               fillColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                              checkColor: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(Colors.transparent),
+                              checkColor: WidgetStateProperty.all(
                                   isDark ? Colors.white70 : Colors.black87),
                             ),
                         headingCheckboxTheme: headingCheckboxTheme ??
@@ -241,21 +244,21 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                   borderRadius: BorderRadius.circular(1)),
                               materialTapTargetSize:
                                   MaterialTapTargetSize.padded,
-                              side: MaterialStateBorderSide.resolveWith((_) =>
+                              side: WidgetStateBorderSide.resolveWith((_) =>
                                   BorderSide(
                                       width: .4,
                                       color: isDark
                                           ? Colors.white70
                                           : Colors.black87)),
                               fillColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                              checkColor: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(Colors.transparent),
+                              checkColor: WidgetStateProperty.all(
                                   isDark ? Colors.white70 : Colors.black87),
                             ),
 
                         // smRatio: 0.5,
                         // lmRatio: 4.5,
-                        headingRowColor: MaterialStateProperty.all(
+                        headingRowColor: WidgetStateProperty.all(headerColor ??
                             Theme.of(context).primaryColor.withOpacity(.2)),
                         onSelectAll: source.toggleAllSelection,
                         sortColumnIndex: source.sortIndex,
@@ -263,6 +266,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                         showBottomBorder: false,
                         showCheckboxColumn: !mini,
                         columns: columns, rows: rows,
+                        dataRowColor: WidgetStatePropertyAll(backgroundColor),
                         // source: source
                       ),
                       Positioned(
