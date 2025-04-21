@@ -16,14 +16,14 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // late TableCubit<T> cubit;
   // late SelectedCubit<S> selectedCubit;
   // late TableRepository<T> repository;
-  final bool mini;
+  final bool mini, showPerpageOnTop;
   String get searchHintText => 'Search';
    Color? get headerColor => null;
    Color? get backgroundColor => null;
 
   CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
 
-  TableListState({ this.mini = false});
+  TableListState({ this.showPerpageOnTop =true,this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
   // double? get height => MediaQuery.of(context).size.height - 100;
@@ -171,7 +171,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                             children: [
                               search,
                               if (cons.maxWidth >= 800) const Spacer(),
-                              if (!mini || (cons.maxWidth >= 800))
+                              if  (showPerpageOnTop && (!mini || (cons.maxWidth >= 800)))
                                 Perpage(source: source),
                               if (!mini || (cons.maxWidth >= 800))
                                 const SizedBox(width: 20.0),
