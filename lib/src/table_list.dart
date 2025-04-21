@@ -70,10 +70,10 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
               dividerThickness: .5,
               horizontalMargin: 20,
-              checkboxHorizontalMargin: 20,
+              checkboxHorizontalMargin: 20, dataRowMaxHeight: 60,
               // dataRowMinHeight: 90,
               columnSpacing: 60,
-              headingRowHeight: 50,
+              headingRowHeight: 60,
               headingTextStyle: source.headerTextStyle
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
             ),
