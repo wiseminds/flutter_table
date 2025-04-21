@@ -20,6 +20,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   String get searchHintText => 'Search';
    Color? get headerColor => null;
    Color? get backgroundColor => null;
+   Color? get dividerColor => null;
 
   CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
 
@@ -64,7 +65,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
     var isDark = Theme.of(context).brightness == Brightness.dark;
     return Theme(
         data: Theme.of(context).copyWith(
-            dataTableTheme: DataTableThemeData(
+            dataTableTheme: DataTableThemeData( 
               dataTextStyle: source.rowTextStyle
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
               dividerThickness: .5,
@@ -75,7 +76,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
               headingRowHeight: 50,
               headingTextStyle: source.headerTextStyle
                   .copyWith(color: isDark ? Colors.white70 : Colors.black87),
-            ),
+            ),dividerColor: dividerColor,
             checkboxTheme: CheckboxThemeData(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1)),
