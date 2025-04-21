@@ -221,6 +221,10 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                       //                 300),
                       child: Material(
                     color: backgroundColor ?? Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          width: 1, color: dividerColor ?? Colors.transparent),
+                    ),
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
@@ -268,6 +272,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                       color:
                                           dividerColor ?? Colors.transparent),
                                   bottom: BorderSide(
+                                      width: 1,
                                       color:
                                           dividerColor ?? Colors.transparent)),
 
