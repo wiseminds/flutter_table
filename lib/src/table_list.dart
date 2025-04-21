@@ -261,15 +261,12 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                     isDark ? Colors.white70 : Colors.black87),
                               ),
                           border: TableBorder(
-                            horizontalInside: BorderSide(
-                                width: 1,
-                                color: dividerColor ?? Colors.transparent),
-                          ),
-                          // decoration: BoxDecoration(
-                          //     border: Border(
-                          //         bottom: BorderSide(
-                          //             color:
-                          //                 dividerColor ?? Colors.transparent))),
+                              horizontalInside: BorderSide(
+                                  width: 1,
+                                  color: dividerColor ?? Colors.transparent),
+                            
+                              bottom: BorderSide(
+                                  color: dividerColor ?? Colors.transparent)),
 
                           // smRatio: 0.5,
                           // lmRatio: 4.5,
