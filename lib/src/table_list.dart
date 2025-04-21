@@ -280,7 +280,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                           onSelectAll: source.toggleAllSelection,
                           sortColumnIndex: source.sortIndex,
                           sortAscending: source.sortAscending,
-                          showBottomBorder: false,
+                          showBottomBorder: true,
                           showCheckboxColumn: !mini,
                           columns: columns, rows: rows,
                           // dataRowColor: WidgetStatePropertyAll(backgroundColor),
