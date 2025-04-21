@@ -18,11 +18,12 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // late TableRepository<T> repository;
   final bool mini;
   String get searchHintText => 'Search';
-  final Color? headerColor, backgroundColor;
+   Color? get headerColor => null;
+   Color? get backgroundColor => null;
 
   CheckboxThemeData? datarowCheckboxTheme, headingCheckboxTheme;
 
-  TableListState({this.headerColor, this.backgroundColor, this.mini = false});
+  TableListState({ this.mini = false});
   List<Widget> get actions => [];
   List<Widget> get selectedActions => [];
   // double? get height => MediaQuery.of(context).size.height - 100;
