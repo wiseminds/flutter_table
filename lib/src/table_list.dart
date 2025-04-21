@@ -261,14 +261,15 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                 checkColor: WidgetStateProperty.all(
                                     isDark ? Colors.white70 : Colors.black87),
                               ),
-                          border: tableBorder?? TableBorder(
-                              horizontalInside: BorderSide(
-                                  width: 1,
-                                  color: dividerColor ?? Colors.transparent),
-                              top: const BorderSide(
-                                  width: .1, color: Colors.transparent),
-                              bottom: BorderSide(
-                                  color: dividerColor ?? Colors.transparent)),
+                          border: tableBorder ??
+                              TableBorder(
+                                  horizontalInside: BorderSide(
+                                      width: 1,
+                                      color:
+                                          dividerColor ?? Colors.transparent),
+                                  bottom: BorderSide(
+                                      color:
+                                          dividerColor ?? Colors.transparent)),
 
                           // smRatio: 0.5,
                           // lmRatio: 4.5,
