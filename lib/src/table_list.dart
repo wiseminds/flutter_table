@@ -30,6 +30,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
   // double? get height => MediaQuery.of(context).size.height - 100;
   double get padding => 20.0;
   double get minWidth => 1200;
+  TableBorder? get tableBorder => null;
   // late PaginatorController paginatorController;
 
   bool sortAscending = true;
@@ -260,7 +261,7 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                                 checkColor: WidgetStateProperty.all(
                                     isDark ? Colors.white70 : Colors.black87),
                               ),
-                          border: TableBorder(
+                          border: tableBorder?? TableBorder(
                               horizontalInside: BorderSide(
                                   width: 1,
                                   color: dividerColor ?? Colors.transparent),
