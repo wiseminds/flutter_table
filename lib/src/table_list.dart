@@ -264,7 +264,8 @@ abstract class TableListState<W extends StatefulWidget, T> extends State<W> {
                               horizontalInside: BorderSide(
                                   width: 1,
                                   color: dividerColor ?? Colors.transparent),
-                            
+                              top: BorderSide(
+                                  color: dividerColor ?? Colors.transparent),
                               bottom: BorderSide(
                                   color: dividerColor ?? Colors.transparent)),
 
